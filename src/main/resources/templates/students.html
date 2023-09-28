@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap demo</title>
+  <script src="https://kit.fontawesome.com/47ae1cb85a.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Имя</th>
+        <th scope="col">Фамилия</th>
+        <th scope="col">Группа</th>
+        <th scope="col">Статус</th>
+        <th scope="col">Дата зачисления</th>
+        <th scope="col">Управление</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="el : ${students}">
+        <th scope="row" th:text="${el.id}"></th>
+        <td th:text="${el.name}"/>
+        <td th:text="${el.lastname}"/>
+        <td th:text="${el.stream_group}"/>
+        <td th:text="${el.status}"/>
+        <td th:text="${el.date}"/>
+        <td>
+          <a th:href="'/editStudent/'+${el.id}" class="btn btn-primary me-3" title="Редактировать студента"><i class="fa-solid fa-pencil"></i></a>
+          <a th:href="'/deleteStudent/'+${el.id}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>
