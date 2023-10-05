@@ -1,6 +1,8 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.Discipline;
 import com.example.demo.models.Student;
+import com.example.demo.repo.DisciplineRepo;
 import com.example.demo.repo.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,16 @@ import java.util.Optional;
 public class StudentController {
     @Autowired
     private StudentRepo studentRepo;
+    @Autowired
+    private DisciplineRepo disciplineRepo;
+    @GetMapping("/student/{id}")
+    public String showStudent(@PathVariable(value = "id") long id, Model model){
+        Optional<Student> student = studentRepo.findById(id);
+        model.addAttribute("student", student.get());
+        Iterable<Discipline> disciplines = disciplineRepo.findAll();
+        model.addAttribute("disciplines", disciplines);
+        return "student";
+    }
     @GetMapping("/addStudent")
     public String addStudent(){
         return "addStudent";
